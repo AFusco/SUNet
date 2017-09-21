@@ -4,15 +4,9 @@ import os
 import numpy as np
 import tensorflow as tf
 
-from build_features import int32_to_uint8, threshold_confidence
 from PIL import Image
 
 """ The preprocessing data pipeline
-
-The pipeline is composed of the following steps:
-
-1- DatasetToRawCSV makes a CSV file with all the absolute paths of the images
-2- MakeGroundtruths constructs a confidence map for each file.
 
 """
 
@@ -70,6 +64,8 @@ class MakeAllConfidenceMaps(luigi.Task):
 
         conf_folder = data_folder + '/interim/' + self.dataset_name + '/conf/'
 
+        from features.build_features import int32_to_uint8, threshold_confidence
+
         if not os.path.exists(conf_folder):
             #todo exception
             os.mkdir(conf_folder)
@@ -103,16 +99,41 @@ class MakeAllConfidenceMaps(luigi.Task):
                 line = path_tuple['left'] + ',' + path_tuple['disp'] + ',' + path_tuple['conf']
                 outfile.write(line + '\n')
 
-
-class MakeTFRecords(luigi.Task):
-    number_of_splits = luigi.IntParameter(default=5)
+class SplitDataset(luigi.Task):
     dataset_name = luigi.Parameter()
+    offset = luigi.IntParameter(default=0)
+    lines = luigi.IntParameter(default=0)
+    filename = luigi.Parameter()
 
     def requires(self):
         return MakeAllConfidenceMaps(self.dataset_name)
 
     def output(self):
-        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/processed.csv')
+        return luigi.LocalTarget(data_folder + '/interim/' + self.dataset_name + '/{}.csv'.format(self.filename))
+
+    def run(self):
+        with self.input().open() as infile, self.output().open('w') as outfile:
+            samples = infile.readlines()
+
+            low_bound = self.offset
+            high_bound = self.offset + self.lines
+            if self.lines == 0 or high_bound > len(samples):
+                high_bound = len(samples)
+
+            for l in samples[low_bound:high_bound]:
+                outfile.write(l)
+
+class MakeTFRecords(luigi.Task):
+    dataset_name = luigi.Parameter()
+    offset = luigi.IntParameter(default=0)
+    lines = luigi.IntParameter(default=0)
+    filename = luigi.Parameter()
+
+    def requires(self):
+        return SplitDataset(self.dataset_name, self.offset, self.lines, self.filename)
+
+    def output(self):
+        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/{}.tfrecords'.format(self.filename))
 
     def run(self):
         lines = self.input().open().readlines()
@@ -129,24 +150,14 @@ class MakeTFRecords(luigi.Task):
             return tf.train.Feature(int64_list=tf.train.Int64List(value=[value]))
 
 
-        outfile = self.output().open('w')
-        for split in range(self.number_of_splits):
+        # create output
+        with self.output().open('w') as f:
+            pass
 
-            tfrecords_path = data_folder + '/processed/' + self.dataset_name + '/fold-{}.tfrecords'.format(split+1)
-            writer = tf.python_io.TFRecordWriter(tfrecords_path)
+        with self.input().open() as infile, tf.python_io.TFRecordWriter(self.output().path) as writer:
 
-            #Get lines bound for splits
-            low_bound = int(split * samples_count/self.number_of_splits)
-            high_bound = int(low_bound + samples_count/self.number_of_splits)
-
-            if high_bound > samples_count:
-                high_bound = samples_count
-
-
-            for line in lines[low_bound:high_bound]:
+            for line in infile.readlines():
                 counter += 1
-
-                #get paths
                 left_path, disp_path, conf_path = [x.strip() for x in line.split(',')]
 
                 #load images
@@ -186,14 +197,39 @@ class MakeTFRecords(luigi.Task):
 
                 writer.write(example.SerializeToString())
                 if counter % 20 == 0:
-                    print("Written", counter, "out of", samples_count)
+                    print("Written", counter, "out of", len(lines))
+
+            print("Written", counter, "out of", len(lines))
+
+class MakeTestData(luigi.Task):
+    dataset_name = luigi.Parameter()
+
+    def output(self):
+        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/test_data.tfrecords')
 
 
-            writer.close()
-            outfile.write(tfrecords_path)
+    def requires(self):
+        return MakeTFRecords(self.dataset_name, 0, 30, 'test_data')
 
-        outfile.close()
+class MakeEvalData(luigi.Task):
+    dataset_name = luigi.Parameter()
+
+    def output(self):
+        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/train_data.tfrecords')
+
+    def requires(self):
+        return MakeTFRecords(self.dataset_name, 30, 0, 'train_data')
+
+class ProcessData(luigi.Task):
+    dataset_name = luigi.Parameter()
+
+    def requires(self):
+        yield MakeTestData(self.dataset_name)
+        yield MakeEvalData(self.dataset_name)
 
 
 if __name__ == '__main__':
+    # Path hack.
+    import sys, os
+    sys.path.insert(0, os.path.abspath(os.path.dirname(os.path.realpath(__file__))+'/..'))
     luigi.run()

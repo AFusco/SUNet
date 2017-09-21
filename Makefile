@@ -22,7 +22,7 @@ requirements: test_environment
 
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) src/data/data_pipeline.py --local-scheduler MakeTFRecords --dataset-name kitti
+	$(PYTHON_INTERPRETER) src/data/data_pipeline.py --local-scheduler ProcessData --dataset-name kitti
 
 ## Clean Dataset
 clean-data:
