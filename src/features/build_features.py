@@ -44,7 +44,7 @@ def threshold_confidence(disparity, disparity_gt, threshold):
     # Unkown pixels are the pixels in the dmap_gt that are set to 0
     unknown_mask = disparity_gt == 0
 
-    conf_gt = np.ones_like(disparity, dtype=np.float) # Initialize everything to 1
+    conf_gt = np.ones_like(disparity, dtype=np.float32) # Initialize everything to 1
     conf_gt[wrong_mask] = 0
     conf_gt[unknown_mask] = -1
 
@@ -78,7 +78,7 @@ def composite_confidence(disparity, disparity_gt, max_threshold):
     wrong_mask = np.absolute( disparity - disparity_gt ) > threshold
     unknown_mask = disparity_gt == 0
 
-    conf_gt = np.ones_like(disparity, dtype=np.float)
+    conf_gt = np.ones_like(disparity, dtype=np.float32)
     conf_gt[wrong_mask] = 0
     conf_gt[unknown_mask] = -1
 

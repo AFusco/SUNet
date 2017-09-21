@@ -1,4 +1,6 @@
 import tensorflow as tf
+import os
+import numpy as np
 
 IMAGE_SIZE=300
 
@@ -80,8 +82,8 @@ def distorted_inputs(data_dir, batch_size):
 
     # We apply the same random crop to all the images
     # Randomly crop a [height, width] section of the image.
-    offset_height = tf.random_uniform([1], minval=0, maxval=left.shape[0]-height, dtype=tf.int32)
-    offset_width = tf.random_uniform([1], minval=0, maxval=left.shape[1]-width, dtype=tf.int32)
+    offset_height = tf.random_uniform([], minval=0, maxval=360-height, dtype=tf.int32)
+    offset_width = tf.random_uniform([], minval=0, maxval=1200-width, dtype=tf.int32)
 
     resized_left = tf.image.crop_to_bounding_box(left, offset_height, offset_width, height, width)
     resized_disp = tf.image.crop_to_bounding_box(disp, offset_height, offset_width, height, width)
@@ -91,13 +93,17 @@ def distorted_inputs(data_dir, batch_size):
     # the order their operation.
     # NOTE: since per_image_standardization zeros the mean and makes
     # the stddev unit, this likely has no effect see tensorflow#1458.
-    distorted_left = tf.image.random_brightness(resized_left,
-					       max_delta=63)
-    distorted_left = tf.image.random_contrast(distorted_left,
-					     lower=0.2, upper=1.8)
+    distorted_left = resized_left
+
+
+#    distorted_left = tf.image.random_brightness(distorted_left,
+#					       max_delta=63)
+#    distorted_left = tf.image.random_contrast(distorted_left,
+#					     lower=0.2, upper=1.8)
 
     # Subtract off the mean and divide by the variance of the pixels.
-    # float_image = tf.image.per_image_standardization(distorted_image)
+#    distorted_left = tf.image.per_image_standardization(distorted_left)
+
 
     # Ensure that the random shuffling has good mixing properties.
     min_queue_examples = 100
@@ -141,8 +147,9 @@ def inputs(eval_data, data_dir, batch_size):
     height = IMAGE_SIZE
     width = IMAGE_SIZE
 
-    offset_height = tf.random_uniform([1], minval=0, maxval=left.shape[0]-height, dtype=tf.int32)
-    offset_width = tf.random_uniform([1], minval=0, maxval=left.shape[1]-width, dtype=tf.int32)
+    offset_height = tf.random_uniform([], minval=0, maxval=60, dtype=tf.int32)
+    offset_width = tf.random_uniform([], minval=0, maxval=900, dtype=tf.int32)
+
     resized_left = tf.image.crop_to_bounding_box(left, offset_height, offset_width, height, width)
     resized_disp = tf.image.crop_to_bounding_box(disp, offset_height, offset_width, height, width)
     resized_conf = tf.image.crop_to_bounding_box(conf, offset_height, offset_width, height, width)
@@ -187,13 +194,13 @@ def read_and_decode(filename_queue):
     disp = tf.decode_raw(features['disp_raw'], tf.uint8)
 
     # Confidence map is made of floats
-    conf = tf.decode_raw(features['conf_raw'], tf.float)
+    conf = tf.decode_raw(features['conf_raw'], tf.float32)
 
     # Reshape to original size.
     # Disp and gt will have a third dimension to allow future stacking.
     left = tf.reshape(left, tf.stack([height, width, 3]))
-    disp = tf.reshape(disp, tf.stack([height, width]))
-    conf = tf.reshape(conf, tf.stack([height, width]))
+    disp = tf.reshape(disp, tf.stack([height, width, 1]))
+    conf = tf.reshape(conf, tf.stack([height, width, 1]))
 
     return left, disp, conf
 

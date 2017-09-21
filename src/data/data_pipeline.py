@@ -165,7 +165,6 @@ class MakeTFRecords(luigi.Task):
                 disp = np.array(Image.open(disp_path))
                 conf = np.load(conf_path)
 
-
                 # We make sure that height and width match
                 # for all the three images
                 if (left.shape[0] != disp.shape[0] or left.shape[1] != disp.shape[1] or
@@ -187,6 +186,7 @@ class MakeTFRecords(luigi.Task):
                 disp_raw = disp.tostring()
                 conf_raw = conf.tostring()
 
+
                 #create sample
                 example = tf.train.Example(features=tf.train.Features(feature={
                     'height': _int64_feature(height),
@@ -205,20 +205,20 @@ class MakeTestData(luigi.Task):
     dataset_name = luigi.Parameter()
 
     def output(self):
-        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/test_data.tfrecords')
+        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/test.tfrecords')
 
 
     def requires(self):
-        return MakeTFRecords(self.dataset_name, 0, 30, 'test_data')
+        return MakeTFRecords(self.dataset_name, 0, 30, 'test')
 
 class MakeEvalData(luigi.Task):
     dataset_name = luigi.Parameter()
 
     def output(self):
-        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/train_data.tfrecords')
+        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/train.tfrecords')
 
     def requires(self):
-        return MakeTFRecords(self.dataset_name, 30, 0, 'train_data')
+        return MakeTFRecords(self.dataset_name, 30, 0, 'train')
 
 class ProcessData(luigi.Task):
     dataset_name = luigi.Parameter()
