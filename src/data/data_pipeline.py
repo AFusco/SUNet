@@ -30,16 +30,18 @@ class DatasetToRawCSV(luigi.Task):
     def requires(self):
         return RawFiles(self.dataset_name)
 
-    def output(self):
-        return luigi.LocalTarget(data_folder + '/interim/' + self.dataset_name + '/raw.csv')
+    def output(self): 
+        return luigi.LocalTarget(data_folder + '/interim/' +
+            self.dataset_name + '/raw.csv')
 
-    def run(self):
+    def run(self): 
         raw_dir = self.input().path
         dirs = [ 'left', 'disparity', 'gt' ]
 
         # Get only the filenames that are in all directories
-        filenames = [f for f in os.listdir(os.path.join(raw_dir, dirs[0]))
-                if all(os.path.isfile(os.path.join(raw_dir, data_dir, f)) for data_dir in dirs)]
+        filenames = [f for f in os.listdir(os.path.join(raw_dir, dirs[0])) if
+                all(os.path.isfile(os.path.join(raw_dir, data_dir, f)) for
+                    data_dir in dirs)]
 
         with self.output().open('w') as outfile:
             for f in filenames:
@@ -56,7 +58,8 @@ class MakeAllConfidenceMaps(luigi.Task):
         return DatasetToRawCSV(self.dataset_name)
 
     def output(self):
-        return luigi.LocalTarget(data_folder + '/interim/' + self.dataset_name + '/processed.csv')
+        return luigi.LocalTarget(data_folder + '/interim/' + self.dataset_name
+                + '/processed.csv')
 
     def run(self):
 
@@ -205,7 +208,8 @@ class MakeTestData(luigi.Task):
     dataset_name = luigi.Parameter()
 
     def output(self):
-        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/test.tfrecords')
+        return luigi.LocalTarget(data_folder + '/processed/' +
+                self.dataset_name + '/test.tfrecords')
 
 
     def requires(self):
@@ -215,7 +219,8 @@ class MakeEvalData(luigi.Task):
     dataset_name = luigi.Parameter()
 
     def output(self):
-        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/train.tfrecords')
+        return luigi.LocalTarget(data_folder + '/processed/' +
+                self.dataset_name + '/train.tfrecords')
 
     def requires(self):
         return MakeTFRecords(self.dataset_name, 30, 0, 'train')

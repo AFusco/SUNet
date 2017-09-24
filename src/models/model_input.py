@@ -2,7 +2,7 @@ import tensorflow as tf
 import os
 import numpy as np
 
-IMAGE_SIZE=300
+IMAGE_SIZE=224
 
 def _generate_training_batch(left, disp, conf, min_queue_examples,
                                     batch_size, shuffle):

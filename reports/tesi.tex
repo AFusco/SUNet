@@ -1,0 +1,119 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{newlfont}
+\usepackage{csquotes}
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\addbibresource{mybibliography.bib}
+\renewcommand{\baselinestretch}{1.5}
+
+\textwidth=450pt
+\oddsidemargin=0pt
+
+\begin{document}
+
+% INTESTAZIONE
+\begin{titlepage}
+\begin{center}
+    {{\Large{\textsc{
+        Alma Mater Studiorum $\cdot$ Università di Bologna
+    }}}}
+    \rule[0.1cm]{15.8cm}{0.1mm}
+    \rule[0.5cm]{15.8cm}{0.6mm}
+{\small{\bf 
+    SCUOLA DI INGEGNERIA E ARCHITETTURA\\
+    Corso di Laurea in Ingegneria Informatica
+}}
+\end{center}
+\vspace{15mm}
+\begin{center}
+{\LARGE{\bf
+    Determinazione della confidenza di mappe depth tramite Deep Learning
+}}\\
+\vspace{3mm}
+\end{center}
+\vspace{40mm}
+\par
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+{\large{\bf Relatore:\\
+Chiar.mo Prof.\\
+Mattoccia Stefano}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.47\textwidth}\raggedleft
+{\large{\bf Presentata da:\\
+Fusco Alessandro}}
+\end{minipage}
+\vspace{20mm}
+\begin{center}
+{\large{\bf 
+    Sessione di ottobre\\
+    2016/2017
+}}
+\end{center}
+\end{titlepage}
+
+
+\chapter{Introduzione}
+Nel vasto panorama del digitale, uno degli argomenti più caldi degli anni
+recenti è l'intelligenza artificiale (AI), che sta ricevendo sempre più
+attenzione sia dal mondo accademico che da quello industriale. 
+
+In particolare il Machine Learning (apprendimento automatico), ovvero quella
+branca dell'intelligenza artificiale che si occupa di fornire ai calcolatori
+l'abilità di apprendere senza essere stati esplicitamente programmati, ha
+subito recentemente un boom esponenziale.
+
+Seppur le basi matematiche del Machine Learning siano state definite e studiate
+lungo il corso del ventesimo secolo, solo di recente
+\cite{krizhevsky2012imagenet} le si sono potute applicare efficientemente a
+scopi pratici, grazie al notevole miglioramento delle tecnologie di calcolo
+parallelo necessarie.
+
+Tra le tante applicazioni di Machine Learning, emerge tra le altre quella
+relativa alla computer vision.  Nel momento in cui si vede necessaria
+un'interpretazione ad alto livello di quelli che sono i vari bit di
+informazione di un'immagine o di un video, quando è necessario definire,
+rilevare o ricostruire proprietà visuali d'interesse inesprimibili
+proceduralmente, lì i mondi della visione artificiale e dell'apprendimento
+automatico si vanno a fondere.
+
+La visione stereo è quella branca della computer vision che si occupa della
+ricostruzione di scene tridimensionali tramite l'acquisizione di immagini
+bidimensionali, tentando di ricostruire l'informazione perduta nel processo di
+acquisizione. 
+
+L'esigenza di accuratezza nell'impiego di algoritmi stereo (detti di stereo
+matching) ha portato necessità della creazione di misure di confidenza, ovvero
+indici che riescano a valutare a monte la correttezza di un processo di
+ricostruzione 3D arbitrario.
+
+I metodi di misura di misura di confidenza attuali sono molteplici; alcune
+strategie possono utilizzare nozioni geometriche del sistema stereoscopico;
+metodi più complessi, quali alberi di classificazione, possono combinare le
+varie strategie per valutare quale sia la più efficace in un determinato
+contesto.  Tecniche più recenti basate su Deep Learning, anche se
+computazionalmente più costose, hanno dimostrato però di portare a risultati di
+qualità notevolmente superiore, in quanto riescono a riconoscere pattern ad
+alto livello dei possibili problemi che possono indurre un algoritmo stereo a
+riportare risultati errati, quale la presenza di superfici riflettenti o
+occlusioni.
+
+Questa tesi vuole essere uno studio su come applicare tecniche di deep learning
+al fine della determinazione di una misura di confidenza "full-resolution",
+ovvero calcolata analizzando l'intera immagine stereo.
+
+\chapter{Sistemi di visione stereo}
+
+\medskip
+ 
+\printbibliography
+
+
+\end{document}
