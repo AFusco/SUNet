@@ -133,10 +133,12 @@ class MakeTFRecords(luigi.Task):
     filename = luigi.Parameter()
 
     def requires(self):
-        return SplitDataset(self.dataset_name, self.offset, self.lines, self.filename)
+        return SplitDataset(self.dataset_name, self.offset, self.lines,
+                self.filename)
 
     def output(self):
-        return luigi.LocalTarget(data_folder + '/processed/' + self.dataset_name + '/{}.tfrecords'.format(self.filename))
+        return luigi.LocalTarget(data_folder + '/processed/' +
+                self.dataset_name + '/{}.tfrecords'.format(self.filename))
 
     def run(self):
         lines = self.input().open().readlines()
@@ -220,18 +222,29 @@ class MakeEvalData(luigi.Task):
 
     def output(self):
         return luigi.LocalTarget(data_folder + '/processed/' +
+                self.dataset_name + '/validate.tfrecords')
+
+
+    def requires(self):
+        return MakeTFRecords(self.dataset_name, 30, 60, 'test')
+
+class MakeTrainData(luigi.Task):
+    dataset_name = luigi.Parameter()
+
+    def output(self):
+        return luigi.LocalTarget(data_folder + '/processed/' +
                 self.dataset_name + '/train.tfrecords')
 
     def requires(self):
-        return MakeTFRecords(self.dataset_name, 30, 0, 'train')
+        return MakeTFRecords(self.dataset_name, 60, 0, 'train')
 
 class ProcessData(luigi.Task):
     dataset_name = luigi.Parameter()
 
     def requires(self):
+        yield MakeTrainData(self.dataset_name)
         yield MakeTestData(self.dataset_name)
         yield MakeEvalData(self.dataset_name)
-
 
 if __name__ == '__main__':
     # Path hack.

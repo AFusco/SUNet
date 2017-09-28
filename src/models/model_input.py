@@ -1,8 +1,12 @@
 import tensorflow as tf
 import os
+import argparse
 import numpy as np
 
-IMAGE_SIZE=224
+IMAGE_HEIGHT=256
+IMAGE_WIDTH=512
+
+MIN_QUEUE_EXAMPLES = 2
 
 def _generate_training_batch(left, disp, conf, min_queue_examples,
                                     batch_size, shuffle):
@@ -29,14 +33,14 @@ def _generate_training_batch(left, disp, conf, min_queue_examples,
             [left, disp, conf],
             batch_size=batch_size,
             num_threads=num_preprocess_threads,
-            capacity=min_queue_examples + 3 * batch_size,
+            capacity=MIN_QUEUE_EXAMPLES + 3 * batch_size,
             min_after_dequeue=min_queue_examples)
     else:
         lefts, disps, confs = tf.train.batch(
             [left, disp, conf],
             batch_size=batch_size,
             num_threads=num_preprocess_threads,
-            capacity=min_queue_examples + 3 * batch_size)
+            capacity=MIN_QUEUE_EXAMPLES + 3 * batch_size)
 
     # Display the training images in the visualizer.
     tf.summary.image('lefts', lefts)
@@ -72,8 +76,8 @@ def distorted_inputs(data_dir, batch_size):
     disp = tf.cast(disp, tf.float32)
     conf = tf.cast(conf, tf.float32)
 
-    height = IMAGE_SIZE
-    width = IMAGE_SIZE
+    height = IMAGE_HEIGHT
+    width = IMAGE_WIDTH
 
     # Image processing for training the network. 
     # We apply random 'in-place' distorsion to the left images
@@ -95,24 +99,22 @@ def distorted_inputs(data_dir, batch_size):
     # the stddev unit, this likely has no effect see tensorflow#1458.
     distorted_left = resized_left
 
-
 #    distorted_left = tf.image.random_brightness(distorted_left,
 #					       max_delta=63)
 #    distorted_left = tf.image.random_contrast(distorted_left,
 #					     lower=0.2, upper=1.8)
 
     # Subtract off the mean and divide by the variance of the pixels.
-#    distorted_left = tf.image.per_image_standardization(distorted_left)
+    #distorted_left = tf.image.per_image_standardization(distorted_left)
 
 
     # Ensure that the random shuffling has good mixing properties.
-    min_queue_examples = 100
     print ('Filling queue with %d CIFAR images before starting to train. '
-	 'This will take a few minutes.' % min_queue_examples)
+	 'This will take a few minutes.' % MIN_QUEUE_EXAMPLES)
 
     # Generate a batch of images and labels by building up a queue of examples.
     return _generate_training_batch(distorted_left, resized_disp, resized_conf,
-					 min_queue_examples, batch_size,
+					 MIN_QUEUE_EXAMPLES, batch_size,
 					 shuffle=True)
 
 
@@ -144,8 +146,8 @@ def inputs(eval_data, data_dir, batch_size):
     disp = tf.cast(disp, tf.float32)
     conf = tf.cast(conf, tf.float32)
 
-    height = IMAGE_SIZE
-    width = IMAGE_SIZE
+    height = IMAGE_HEIGHT
+    width = IMAGE_WIDTH
 
     offset_height = tf.random_uniform([], minval=0, maxval=60, dtype=tf.int32)
     offset_width = tf.random_uniform([], minval=0, maxval=900, dtype=tf.int32)
@@ -155,17 +157,19 @@ def inputs(eval_data, data_dir, batch_size):
     resized_conf = tf.image.crop_to_bounding_box(conf, offset_height, offset_width, height, width)
 
     # Ensure that the random shuffling has good mixing properties.
-    min_queue_examples = 100
     print ('Filling queue with %d CIFAR images before starting to train. '
-	 'This will take a few minutes.' % min_queue_examples)
+	 'This will take a few minutes.' % MIN_QUEUE_EXAMPLES)
 
     # Generate a batch of images and labels by building up a queue of examples.
     return _generate_training_batch(distorted_left, resized_disp, resized_conf,
-					 min_queue_examples, batch_size,
+					 MIN_QUEUE_EXAMPLES, batch_size,
 					 shuffle=True)
 
 
 def read_and_decode(filename_queue):
+    """
+    Reads a triplet from a tfrecord files
+    """
 
     # Reader 
     reader = tf.TFRecordReader()
@@ -203,10 +207,3 @@ def read_and_decode(filename_queue):
     conf = tf.reshape(conf, tf.stack([height, width, 1]))
 
     return left, disp, conf
-
-    # Resize to constant size
-    # resized_left = tf.image.resize_image_with_crop_or_pad(image=left, target_height=IMAGE_HEIGHT, target_width=IMAGE_WIDTH)
-    # resized_disp = tf.image.resize_image_with_crop_or_pad(image=disp, target_height=IMAGE_HEIGHT, target_width=IMAGE_WIDTH)
-    # resized_gt = tf.image.resize_image_with_crop_or_pad(image=gt, target_height=IMAGE_HEIGHT, target_width=IMAGE_WIDTH)
-
-    # return _generate_training_batch(resized_left, resized_disp, resized_gt, 100, 100)

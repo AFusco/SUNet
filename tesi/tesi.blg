@@ -1,0 +1,116 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: tesi.aux
+The style file: biblatex.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: tesi-blx.bib
+Database file #2: bibliography.bib
+I was expecting a `,' or a `}'---line 56 of file bibliography.bib
+ :     
+ :     year   = {2017}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Biblatex version: 3.3
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2630 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2630 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2630 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2630 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2630 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2630 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2634 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2634 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2640 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2644 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2644 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2648 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2648 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2654 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2658 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2658 of file biblatex.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2746 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2746 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2746 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2746 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2746 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2746 of file biblatex.bst
+Name 2 in "Badrinarayanan, Vijay and Handa, Ankur, and Cipolla, Roberto" has a comma at the end for entry badrinarayanan2015segnet2
+while executing---line 2746 of file biblatex.bst
+You've used 14 entries,
+            6256 wiz_defined-function locations,
+            1259 strings with 11869 characters,
+and the built_in function-call counts, 112523 in all, are:
+= -- 8705
+> -- 1807
+< -- 319
++ -- 3592
+- -- 789
+* -- 8364
+:= -- 13401
+add.period$ -- 0
+call.type$ -- 14
+change.case$ -- 132
+chr.to.int$ -- 31
+cite$ -- 26
+duplicate$ -- 12512
+empty$ -- 9591
+format.name$ -- 1474
+if$ -- 21748
+int.to.chr$ -- 0
+int.to.str$ -- 33
+missing$ -- 0
+newline$ -- 658
+num.names$ -- 550
+pop$ -- 5131
+preamble$ -- 1
+purify$ -- 305
+quote$ -- 0
+skip$ -- 2414
+stack$ -- 0
+substring$ -- 15436
+swap$ -- 2310
+text.length$ -- 368
+text.prefix$ -- 0
+top$ -- 1
+type$ -- 464
+warning$ -- 0
+while$ -- 1702
+width$ -- 0
+write$ -- 645
+(There were 24 error messages)

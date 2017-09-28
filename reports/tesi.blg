@@ -1,15 +1,13 @@
-[0] Config.pm:354> INFO - This is Biber 2.7
-[0] Config.pm:357> INFO - Logfile is 'tesi.blg'
-[74] biber-darwin:303> INFO - === Dom Set 24, 2017, 16:17:03
-[110] Biber.pm:359> INFO - Reading 'tesi.bcf'
-[272] Biber.pm:835> INFO - Found 1 citekeys in bib section 0
-[297] Biber.pm:3670> INFO - Processing section 0
-[320] Biber.pm:3840> INFO - Looking for bibtex format file 'mybibliography.bib' for section 0
-[325] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
-[333] bibtex.pm:1292> INFO - Found BibTeX data source 'mybibliography.bib'
-[358] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[358] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'variable = shifted' with 'variable = non-ignorable'
-[358] Biber.pm:3499> INFO - Sorting list 'ynt/global/' of type 'entry' with scheme 'ynt' and locale 'it-IT'
-[358] Biber.pm:3505> INFO - No sort tailoring available for locale 'it-IT'
-[362] bbl.pm:608> INFO - Writing 'tesi.bbl' with encoding 'UTF-8'
-[363] bbl.pm:712> INFO - Output to tesi.bbl
+[1] Config.pm:354> INFO - This is Biber 2.7
+[1] Config.pm:357> INFO - Logfile is 'tesi.blg'
+[74] biber-darwin:303> INFO - === Mer Set 27, 2017, 11:31:54
+[117] Biber.pm:359> INFO - Reading 'tesi.bcf'
+[291] Biber.pm:835> INFO - Found 4 citekeys in bib section 0
+[316] Biber.pm:3670> INFO - Processing section 0
+[339] Biber.pm:3840> INFO - Looking for bibtex format file 'mybibliography.bib' for section 0
+[344] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
+[356] bibtex.pm:1292> INFO - Found BibTeX data source 'mybibliography.bib'
+[358] Utils.pm:164> WARN - Entry tesitosi does not parse correctly
+[370] Utils.pm:180> ERROR - BibTeX subsystem: /var/folders/xg/l9trh0l16dzftdr_x9tsybl80000gn/T/72UOIHNHQ_/mybibliography.bib_6886.utf8, line 56, syntax error: found "year", expected end of entry ("}" or ")") (skipping to next "@")
+[370] Biber.pm:109> INFO - WARNINGS: 1
+[370] Biber.pm:113> INFO - ERRORS: 1

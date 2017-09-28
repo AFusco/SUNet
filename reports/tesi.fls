@@ -74,12 +74,12 @@ INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/blx-compat.def
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/blx-compat.def
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/biblatex.def
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/biblatex.def
-INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/bbx/alphabetic.bbx
-INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/bbx/alphabetic.bbx
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
-INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/cbx/alphabetic.cbx
-INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/cbx/alphabetic.cbx
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/biblatex.cfg
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/biblatex.cfg
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/lbx/italian.lbx
@@ -112,6 +112,9 @@ OUTPUT tesi.pdf
 INPUT /usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT tesi.toc
+INPUT tesi.toc
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
@@ -120,6 +123,8 @@ INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/latex-fonts/lasy8.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm
+OUTPUT tesi.toc
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
 INPUT tesi.aux
 INPUT tesi.run.xml
@@ -129,5 +134,4 @@ INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.p
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb

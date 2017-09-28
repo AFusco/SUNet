@@ -1,0 +1,17 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {italian}
+\defcounter {refsection}{0}\relax 
+\select@language {italian}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Introduzione}{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Sistemi di visione stereo}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Cenni di stereo visione}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}Sistemi attivi e passivi}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Algoritmi di matching stereo}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.4}Misure di confidenza per algoritmi stereo}{5}

@@ -1,0 +1,674 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.8 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\sortlist[entry]{none/global/}
+  \entry{krizhevsky2012imagenet}{book}{}
+    \name{author}{3}{}{%
+      {{hash=KA}{%
+         family={Krizhevsky},
+         familyi={K\bibinitperiod},
+         given={Alex},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SI}{%
+         family={Sutskever},
+         familyi={S\bibinitperiod},
+         given={Ilya},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=HGE}{%
+         family={Hinton},
+         familyi={H\bibinitperiod},
+         given={Geoffrey\bibnamedelima E},
+         giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KASIHGE1}
+    \strng{fullhash}{KASIHGE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Advances in neural information processing systems}
+    \field{pages}{1097\bibrangedash 1105}
+    \field{title}{Imagenet classification with deep convolutional neural
+  networks}
+    \field{year}{2012}
+  \endentry
+
+  \entry{goldberg2002stereo}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=GSB}{%
+         family={Goldberg},
+         familyi={G\bibinitperiod},
+         given={Steven\bibnamedelima B},
+         giveni={S\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+      {{hash=MMW}{%
+         family={Maimone},
+         familyi={M\bibinitperiod},
+         given={Mark\bibnamedelima W},
+         giveni={M\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+      {{hash=ML}{%
+         family={Matthies},
+         familyi={M\bibinitperiod},
+         given={Larry},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{GSBMMWML1}
+    \strng{fullhash}{GSBMMWML1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Aerospace Conference Proceedings, 2002. IEEE}
+    \field{pages}{5\bibrangedash 5}
+    \field{title}{Stereo vision and rover navigation software for planetary
+  exploration}
+    \field{volume}{5}
+    \field{year}{2002}
+  \endentry
+
+  \entry{broggi2001self}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=BA}{%
+         family={Broggi},
+         familyi={B\bibinitperiod},
+         given={Alberto},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=BM}{%
+         family={Bertozzi},
+         familyi={B\bibinitperiod},
+         given={Massimo},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=FA}{%
+         family={Fascioli},
+         familyi={F\bibinitperiod},
+         given={Alessandra},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{BABMFA1}
+    \strng{fullhash}{BABMFA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Robotics and Automation, 2001. Proceedings 2001 ICRA.
+  IEEE International Conference on}
+    \field{pages}{3698\bibrangedash 3703}
+    \field{title}{Self-calibration of a stereo vision system for automotive
+  applications}
+    \field{volume}{4}
+    \field{year}{2001}
+  \endentry
+
+  \entry{kanbara2000stereo}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=KM}{%
+         family={Kanbara},
+         familyi={K\bibinitperiod},
+         given={Masayuki},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=FH}{%
+         family={Fujii},
+         familyi={F\bibinitperiod},
+         given={Hirofumi},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=TH}{%
+         family={Takemura},
+         familyi={T\bibinitperiod},
+         given={Haruo},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=YN}{%
+         family={Yokoya},
+         familyi={Y\bibinitperiod},
+         given={Naokazu},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{KM+1}
+    \strng{fullhash}{KMFHTHYN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Augmented Reality, 2000.(ISAR 2000). Proceedings. IEEE
+  and ACM International Symposium on}
+    \field{pages}{97\bibrangedash 100}
+    \field{title}{A stereo vision-based augmented reality system with an
+  inertial sensor}
+    \field{year}{2000}
+  \endentry
+
+  \entry{tesitosi}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=TF}{%
+         family={Tosi},
+         familyi={T\bibinitperiod},
+         given={Fabio},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TF1}
+    \strng{fullhash}{TF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Misure di confidenza e algoritmi per il refinement di mappe
+  depth}
+  \endentry
+
+  \entry{BMVC2016_46}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=PM}{%
+         family={Poggi},
+         familyi={P\bibinitperiod},
+         given={Matteo},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=MS}{%
+         family={Mattoccia},
+         familyi={M\bibinitperiod},
+         given={Stefano},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \name{editor}{2}{}{%
+      {{hash=RCWERH}{%
+         family={Richard C.\bibnamedelima Wilson},
+         familyi={R\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim
+  W\bibinitperiod},
+         given={Edwin R.\bibnamedelima Hancock},
+         giveni={E\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim
+  H\bibinitperiod},
+      }}%
+      {{hash=SWAP}{%
+         family={Smith},
+         familyi={S\bibinitperiod},
+         given={William A.\bibnamedelima P.},
+         giveni={W\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim
+  P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {BMVA Press}%
+    }
+    \strng{namehash}{PMMS1}
+    \strng{fullhash}{PMMS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings of the British Machine Vision Conference
+  (BMVC)}
+    \verb{doi}
+    \verb 10.5244/C.30.46
+    \endverb
+    \field{isbn}{1-901725-59-6}
+    \field{pages}{46.1\bibrangedash 46.13}
+    \field{title}{Learning from scratch a confidence measure}
+    \verb{url}
+    \verb https://dx.doi.org/10.5244/C.30.46
+    \endverb
+    \field{year}{2016}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{Geiger2012CVPR}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=GA}{%
+         family={Geiger},
+         familyi={G\bibinitperiod},
+         given={Andreas},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=LP}{%
+         family={Lenz},
+         familyi={L\bibinitperiod},
+         given={Philip},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=UR}{%
+         family={Urtasun},
+         familyi={U\bibinitperiod},
+         given={Raquel},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GALPUR1}
+    \strng{fullhash}{GALPUR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Conference on Computer Vision and Pattern Recognition
+  (CVPR)}
+    \field{title}{Are we ready for Autonomous Driving? The KITTI Vision
+  Benchmark Suite}
+    \field{year}{2012}
+  \endentry
+
+  \entry{zabih1994non}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=ZR}{%
+         family={Zabih},
+         familyi={Z\bibinitperiod},
+         given={Ramin},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=WJ}{%
+         family={Woodfill},
+         familyi={W\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{ZRWJ1}
+    \strng{fullhash}{ZRWJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{European conference on computer vision}
+    \field{pages}{151\bibrangedash 158}
+    \field{title}{Non-parametric local transforms for computing visual
+  correspondence}
+    \field{year}{1994}
+  \endentry
+
+  \entry{Luigi}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={Spotify},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {GitHub}%
+    }
+    \strng{namehash}{S1}
+    \strng{fullhash}{S1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{howpublished}{\url{https://github.com/spotify/luigi}}
+    \field{title}{Luigi, a tool to build complex pipelines of batch jobs.}
+    \field{journaltitle}{GitHub repository}
+    \field{year}{2017}
+  \endentry
+
+  \entry{tensorflow2015-whitepaper}{misc}{}
+    \name{author}{40}{}{%
+      {{hash=AM}{%
+         family={Abadi},
+         familyi={A\bibinitperiod},
+         given={Mart\'{\i}n},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=AA}{%
+         family={Agarwal},
+         familyi={A\bibinitperiod},
+         given={Ashish},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=BP}{%
+         family={Barham},
+         familyi={B\bibinitperiod},
+         given={Paul},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=BE}{%
+         family={Brevdo},
+         familyi={B\bibinitperiod},
+         given={Eugene},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=CZ}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Zhifeng},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=CC}{%
+         family={Citro},
+         familyi={C\bibinitperiod},
+         given={Craig},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=CGS}{%
+         family={Corrado},
+         familyi={C\bibinitperiod},
+         given={Greg\bibnamedelima S.},
+         giveni={G\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=DA}{%
+         family={Davis},
+         familyi={D\bibinitperiod},
+         given={Andy},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DJ}{%
+         family={Dean},
+         familyi={D\bibinitperiod},
+         given={Jeffrey},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=DM}{%
+         family={Devin},
+         familyi={D\bibinitperiod},
+         given={Matthieu},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=GS}{%
+         family={Ghemawat},
+         familyi={G\bibinitperiod},
+         given={Sanjay},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=GI}{%
+         family={Goodfellow},
+         familyi={G\bibinitperiod},
+         given={Ian},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=HA}{%
+         family={Harp},
+         familyi={H\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=IG}{%
+         family={Irving},
+         familyi={I\bibinitperiod},
+         given={Geoffrey},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=IM}{%
+         family={Isard},
+         familyi={I\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=JY}{%
+         family={Jia},
+         familyi={J\bibinitperiod},
+         given={Yangqing},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=JR}{%
+         family={Jozefowicz},
+         familyi={J\bibinitperiod},
+         given={Rafal},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=KL}{%
+         family={Kaiser},
+         familyi={K\bibinitperiod},
+         given={Lukasz},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=KM}{%
+         family={Kudlur},
+         familyi={K\bibinitperiod},
+         given={Manjunath},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Levenberg},
+         familyi={L\bibinitperiod},
+         given={Josh},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MD}{%
+         family={Man\'{e}},
+         familyi={M\bibinitperiod},
+         given={Dan},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=MR}{%
+         family={Monga},
+         familyi={M\bibinitperiod},
+         given={Rajat},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=MS}{%
+         family={Moore},
+         familyi={M\bibinitperiod},
+         given={Sherry},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=MD}{%
+         family={Murray},
+         familyi={M\bibinitperiod},
+         given={Derek},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=OC}{%
+         family={Olah},
+         familyi={O\bibinitperiod},
+         given={Chris},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=SM}{%
+         family={Schuster},
+         familyi={S\bibinitperiod},
+         given={Mike},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Shlens},
+         familyi={S\bibinitperiod},
+         given={Jonathon},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SB}{%
+         family={Steiner},
+         familyi={S\bibinitperiod},
+         given={Benoit},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=SI}{%
+         family={Sutskever},
+         familyi={S\bibinitperiod},
+         given={Ilya},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=TK}{%
+         family={Talwar},
+         familyi={T\bibinitperiod},
+         given={Kunal},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=TP}{%
+         family={Tucker},
+         familyi={T\bibinitperiod},
+         given={Paul},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=VV}{%
+         family={Vanhoucke},
+         familyi={V\bibinitperiod},
+         given={Vincent},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=VV}{%
+         family={Vasudevan},
+         familyi={V\bibinitperiod},
+         given={Vijay},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=VF}{%
+         family={Vi\'{e}gas},
+         familyi={V\bibinitperiod},
+         given={Fernanda},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=VO}{%
+         family={Vinyals},
+         familyi={V\bibinitperiod},
+         given={Oriol},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=WP}{%
+         family={Warden},
+         familyi={W\bibinitperiod},
+         given={Pete},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=WM}{%
+         family={Wattenberg},
+         familyi={W\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=WM}{%
+         family={Wicke},
+         familyi={W\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=YY}{%
+         family={Yu},
+         familyi={Y\bibinitperiod},
+         given={Yuan},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=ZX}{%
+         family={Zheng},
+         familyi={Z\bibinitperiod},
+         given={Xiaoqiang},
+         giveni={X\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AM+1}
+  \strng{fullhash}{AMAABPBECZCCCGSDADJDMGSGIHAIGIMJYJRKLKMLJMDMRMSMDOCSMSJSBSITKTPVVVVVFVOWPWMWMYYZX1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{Software available from tensorflow.org}
+    \field{title}{{TensorFlow}: Large-Scale Machine Learning on Heterogeneous
+  Systems}
+    \verb{url}
+    \verb https://www.tensorflow.org/
+    \endverb
+    \field{year}{2015}
+  \endentry
+
+  \entry{badrinarayanan2015segnet2}{article}{}
+    \name{author}{3}{}{%
+      {{hash=BV}{%
+         family={Badrinarayanan},
+         familyi={B\bibinitperiod},
+         given={Vijay},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=HA}{%
+         family={Handa},
+         familyi={H\bibinitperiod},
+         given={Ankur},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CR}{%
+         family={Cipolla},
+         familyi={C\bibinitperiod},
+         given={Roberto},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BVHACR1}
+    \strng{fullhash}{BVHACR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{SegNet: A Deep Convolutional Encoder-Decoder Architecture for
+  Robust Semantic Pixel-Wise Labelling}
+    \field{journaltitle}{arXiv preprint arXiv:1505.07293}
+    \field{year}{2015}
+  \endentry
+
+  \entry{DBLP:journals/corr/NohHH15}{article}{}
+    \name{author}{3}{}{%
+      {{hash=NH}{%
+         family={Noh},
+         familyi={N\bibinitperiod},
+         given={Hyeonwoo},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=HS}{%
+         family={Hong},
+         familyi={H\bibinitperiod},
+         given={Seunghoon},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=HB}{%
+         family={Han},
+         familyi={H\bibinitperiod},
+         given={Bohyung},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{NHHSHB1}
+    \strng{fullhash}{NHHSHB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Learning Deconvolution Network for Semantic Segmentation}
+    \verb{url}
+    \verb http://arxiv.org/abs/1505.04366
+    \endverb
+    \field{volume}{abs/1505.04366}
+    \field{journaltitle}{CoRR}
+    \field{year}{2015}
+  \endentry
+
+  \entry{DBLP:journals/corr/ShelhamerLD16}{article}{}
+    \name{author}{3}{}{%
+      {{hash=SE}{%
+         family={Shelhamer},
+         familyi={S\bibinitperiod},
+         given={Evan},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Long},
+         familyi={L\bibinitperiod},
+         given={Jonathan},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=DT}{%
+         family={Darrell},
+         familyi={D\bibinitperiod},
+         given={Trevor},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SELJDT1}
+    \strng{fullhash}{SELJDT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Fully Convolutional Networks for Semantic Segmentation}
+    \verb{url}
+    \verb http://arxiv.org/abs/1605.06211
+    \endverb
+    \field{volume}{abs/1605.06211}
+    \field{journaltitle}{CoRR}
+    \field{year}{2016}
+  \endentry
+\endsortlist
+\endinput

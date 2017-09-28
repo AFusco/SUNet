@@ -1,0 +1,18 @@
+\BOOKMARK [0][-]{chapter.1}{Introduzione}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Sistemi di visione stereo}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Cenni di stereo visione}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{Sistemi attivi e passivi}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.3}{Algoritmi di matching stereo}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.4}{Misure di confidenza per algoritmi stereo}{chapter.2}% 6
+\BOOKMARK [0][-]{chapter.3}{Il progetto}{}% 7
+\BOOKMARK [1][-]{section.3.1}{Dataset}{chapter.3}% 8
+\BOOKMARK [1][-]{section.3.2}{Data preprocessing pipeline}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.3}{La rete neurale}{chapter.3}% 10
+\BOOKMARK [2][-]{subsection.3.3.1}{Strumenti utilizzati}{section.3.3}% 11
+\BOOKMARK [2][-]{subsection.3.3.2}{Upsampling}{section.3.3}% 12
+\BOOKMARK [2][-]{subsection.3.3.3}{Funzioni di attivazione}{section.3.3}% 13
+\BOOKMARK [2][-]{subsection.3.3.4}{Funzione Loss}{section.3.3}% 14
+\BOOKMARK [2][-]{subsection.3.3.5}{Architettura end-to-end}{section.3.3}% 15
+\BOOKMARK [2][-]{subsection.3.3.6}{Training}{section.3.3}% 16
+\BOOKMARK [1][-]{section.3.4}{Risultati}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.5}{Conclusioni}{chapter.3}% 18

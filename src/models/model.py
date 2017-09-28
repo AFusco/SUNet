@@ -1,55 +1,40 @@
 import tensorflow as tf
 import re
-import model_input
+import sys
 import os
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path)
+
+import model_input
 import argparse
 from utils import layers
 
-parser = argparse.ArgumentParser()
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
-
-# Basic model parameters.
-parser.add_argument('--batch_size', type=int, default=128,
-                    help='Number of images to process in a batch.')
-
-parser.add_argument('--data_dir', type=str,
-                    default=os.path.join(dir_path, '../../data/kitti'),
-                    help='Path to the data directory.')
-
-parser.add_argument('--data_name', type=str,
-                    default='kitti',
-                    help='Path to the data directory.')
-
-parser.add_argument('--use_fp16', type=bool, default=False,
-                    help='Train the model using fp16.') # Non funziona
-
-parser.add_argument('--learning_rate', type=float, default=0.01,
-                    help='The optimization learning rate') # Non funziona
+BATCH_SIZE=128
+DATA_DIR='../../data/kitti'
+DATA_NAME='kitti'
+USE_FP16=False
+LEARNING_RATE=0.01
 
 #NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = cifar10_input.NUM_EXAMPLES_PER_EPOCH_FOR_EVAL
-
-
-INITIAL_LEARNING_RATE = 0.01       # Initial learning rate.
 
 # If a model is trained with multiple GPUs, prefix all Op names with tower_name
 # to differentiate the operations. Note that this prefix is removed from the
 # names of the summaries when visualizing a model.
 TOWER_NAME = 'tower'
 
-FLAGS = parser.parse_args()
+FLAGS = []
 
 def distorted_inputs():
     lefts, disps, confs = model_input.distorted_inputs(data_dir=FLAGS.data_name,
                                                     batch_size=FLAGS.batch_size)
 
-    if FLAGS.use_fp16:
+    if USE_FP16:
         lefts = tf.cast(lefts, tf.float16)
         disps = tf.cast(disps, tf.float16)
         confs = tf.cast(confs, tf.float16)
 
     return lefts, disps, confs
-
 
 def inputs(eval_data):
     lefts, disps, confs = model_input.inputs(eval_data=eval_data,
@@ -64,102 +49,151 @@ def inputs(eval_data):
     return lefts, disps, confs
 
 def inference(lefts, disps):
+    """ Generate logits for a confidence map for left and disp """
 
-    batch_size = int(lefts.shape[0])
+    def encoding_unit(name, inputs, num_outputs, batch_norm=True):
+        """
+        input -> conv(3x3) -> norm -> relu -> maxpool2
 
-    print("Batch size: ", batch_size)
+        return maxpool2, conv3x3
 
+        """
+
+        with tf.variable_scope('encoding' + str(name)):
+
+            # Apply 3x3 convolution
+            # Don't apply Relu now because this activation 
+            # will be reused for feed forwarding
+            conv = tf.contrib.layers.conv2d( 
+                        inputs=inputs,
+                        num_outputs=num_outputs,
+                        kernel_size=3,
+                        activation_fn=None
+                    )
+
+            # Normalize batch
+            if batch_norm:
+                conv = tf.contrib.layers.batch_norm(conv)
+            # Apply relu
+            relu = tf.nn.relu(conv)
+            # Maxpool of a factor of 2 and default stride 2
+            pool = tf.contrib.layers.max_pool2d(relu, 2)
+
+        forward = conv
+        return pool, forward
+
+    def decoding_unit(number, inputs, num_outputs, forwards=None, batch_norm=True):
+        """
+        input -> conv_transpose(3x3s2) -> add(forwards) -> batch_norm -> relu
+
+        return relu
+        """
+
+        with tf.variable_scope('decoding' + number):
+
+            conv_transpose = tf.contrib.layers.conv2d_transpose(
+                        inputs=inputs,
+                        num_outputs=num_outputs*2,
+                        kernel_size=3,
+                        stride=2,
+                        activation_fn=None
+                    )
+
+            if forwards != None:
+                if isinstance(forwards, (list, tuple)):
+                    for f in forwards:
+                        conv_transpose = tf.concat([conv_transpose, f], axis=3)
+                else:
+                    conv_transpose = tf.concat([conv_transpose, forwards], axis=3)
+
+            # Reduce depth
+            conv = tf.contrib.layers.conv2d( 
+                        inputs=inputs,
+                        num_outputs=num_outputs,
+                        kernel_size=3,
+                        activation_fn=None
+                    )
+
+            if batch_norm:
+                conv = tf.contrib.layers.batch_norm(conv)
+
+            relu = tf.nn.relu(conv)
+
+        return conv_transpose
+
+
+    ######################
+    # DEFINE THE NETWORK #
+    ######################
+
+    # Left image input
+    #256x512x3 -> 256x512x32
     with tf.variable_scope('left') as scope:
-        left = layers.conv2d_relu('conv1_a', lefts, [3,3,3,64], [1,1,1,1])
-        left = layers.conv2d_relu('conv1_b', left, [3,3,64,64], [1,1,1,1])
-        left = layers.conv2d_relu('conv1_c', left, [3,3,64,64], [1,1,1,1])
-        left_pool = tf.contrib.layers.batch_norm(left)
-        left_pool = tf.nn.max_pool(left_pool, ksize=[1,2,2,1], strides=[1,2,2,1],
-                padding='SAME', name='pool1')
+        #conv3x3->relu
+        left_feat = tf.contrib.layers.conv2d( 
+                        inputs=lefts,
+                        num_outputs=32,
+                        kernel_size=3
+                    )
 
-
+    # disp image input
+    #256x512x1 -> 256x512x32
     with tf.variable_scope('disp') as scope:
-        disp = layers.conv2d_relu('conv1_a', disps, [3,3,1,64], [1,1,1,1])
-        disp = layers.conv2d_relu('conv1_b', disp, [3,3,64,64], [1,1,1,1])
-        disp = layers.conv2d_relu('conv1_c', disp, [3,3,64,64], [1,1,1,1])
-        disp_pool = tf.contrib.layers.batch_norm(disp)
-        disp_pool = tf.nn.max_pool(disp_pool, ksize=[1,2,2,1], strides=[1,2,2,1],
-                padding='SAME', name='pool1')
+        #conv3x3->relu
+        disp_feat = tf.contrib.layers.conv2d( 
+                        inputs=lefts,
+                        num_outputs=32,
+                        kernel_size=3
+                    )
 
-    net = tf.concat([left_pool, disp_pool], axis=3)
+    # Concatenation of left + disp activation maps
+    # x32 + x32 -> 256x512x64
+    concat = tf.concat([left_feat, disp_feat], axis=3)
 
-    net = layers.conv2d_relu('conv3', net, [3,3,128,128], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-    net = layers.conv2d_relu('conv4', net, [3,3,128,128], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-    net = tf.nn.max_pool(net, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1],
-                           padding='SAME', name='pool2')
+    net, scale1 = encoding_unit('1', concat, num_outputs=64)
+    print('Net shape: ', net.shape, ' Scale shape ', scale1.shape)
+    net, scale2 = encoding_unit('2', net, num_outputs=128)
+    print('Net shape: ', net.shape, ' Scale shape ', scale2.shape)
+    net, scale3 = encoding_unit('3', net, num_outputs=256)
+    print('Net shape: ', net.shape, ' Scale shape ', scale3.shape)
+    net, scale4 = encoding_unit('4', net, num_outputs=512)
+    print('Net shape: ', net.shape, ' Scale shape ', scale4.shape)
 
-    net = layers.conv2d_relu('conv5', net, [3,3,128,256], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-    net = layers.conv2d_relu('conv6', net, [3,3,256,256], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-    net = tf.nn.max_pool(net, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1],
-                           padding='SAME', name='pool3')
+    net = decoding_unit('4', net, num_outputs=256, forwards=scale4)
+    print('Net shape: ', net.shape)
+    net = decoding_unit('3', net, num_outputs=128, forwards=scale3)
+    print('Net shape: ', net.shape)
+    net = decoding_unit('2', net, num_outputs=64,  forwards=scale2)
+    print('Net shape: ', net.shape)
 
-    net = layers.conv2d_relu('conv7', net, [3,3,256,512], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-    net = layers.conv2d_relu('conv8', net, [3,3,512,512], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-    
-    net = tf.nn.max_pool(net, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1],
-                           padding='SAME', name='pool4')
+    # Use only left feat 
+    net = decoding_unit('1', net, num_outputs=32, forwards=concat, batch_norm=False)
 
-    net = layers.conv2d_relu('conv9', net, [3,3,512,1024], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-    net = layers.conv2d_relu('conv10', net, [3,3,1024,1024], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
+    disp_logits = tf.contrib.layers.conv2d( 
+                inputs=net,
+                num_outputs=1,
+                kernel_size=3,
+                activation_fn=None
+            )
+    print('Net shape: ', disp_logits.shape)
+    disparity = tf.nn.sigmoid(disp_logits)
 
-    net = tf.nn.max_pool(net, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1],
-                           padding='SAME', name='pool5')
+    return disp_logits, disparity
 
-    net = layers.conv2d_relu('conv11', net, [3,3,1024,1024], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-    net = layers.conv2d_relu('conv12', net, [3,3,1024,1024], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-
-    net = layers.bilinear_upsample('unpool1', net, 4)
-
-    net = layers.conv2d_relu('conv13', net, [3,3,1024,512], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-    net = layers.conv2d_relu('conv14', net, [3,3,512,256], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-
-    net = layers.bilinear_upsample('unpool2', net, 4)
-
-    net = layers.conv2d_relu('conv15', net, [3,3,256,64], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-    net = layers.conv2d_relu('conv16', net, [3,3,64,8], [1,1,1,1])
-    net = tf.contrib.layers.batch_norm(net)
-
-    net = layers.bilinear_upsample('unpool3', net, 2)
-
-    net = layers.conv2d_relu('conv17', net, [3,3,8,1], [1,1,1,1])
-
-    net = tf.sigmoid(net)
-
-    return net
-
-def loss(disp, disp_gt):
+def loss(disp_logits, disp_gt):
     # Mask out the error corresponding to unknown pixels
     mask = tf.where(disp_gt == -1, tf.ones_like(disp_gt), tf.zeros_like(disp_gt))
 
-    # Calculate MSE
-    mse = tf.losses.mean_squared_error(
-        disp,
+    # Calculate cross entropy
+    xentr = tf.losses.sigmoid_cross_entropy(
         disp_gt,
+        logits=disp_logits,
         weights=mask
     )
 
-    tf.summary.scalar('Mse loss', mse)
+    tf.summary.scalar('Cross_entropy', xentr)
 
-    return mse
-
+    return xentr
 
 def train(total_loss, global_step):
 

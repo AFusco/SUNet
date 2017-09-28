@@ -1,7 +1,6 @@
 import tensorflow as tf
 import re
 
-
 #FIXME
 use_fp16=False
 TOWER_NAME = 'tower'
@@ -78,6 +77,73 @@ def conv2d_relu(name, batch, kernel_shape, strides, padding='SAME',
 
     return conv
 
+def conv2d(name, batch, kernel_shape, strides, padding='SAME',
+                kernel_initializer=tf.contrib.layers.xavier_initializer(),
+                bias_initializer=tf.constant_initializer(0.0)):
+
+    with tf.variable_scope(name) as scope:
+
+        kernel = _variable_on_cpu('weights',
+                                   shape=kernel_shape,
+                                   initializer=kernel_initializer)
+
+        conv = tf.nn.conv2d(batch, kernel, strides, padding=padding)
+        biases = _variable_on_cpu('biases', [kernel_shape[3]], bias_initializer)
+        pre_activation = tf.nn.bias_add(conv, biases)
+
+    return pre_activation
+
+def relu(batch):
+    out = tf.nn.relu(batch, name=batch.name)
+    return out
+
+
+def conv2d_sigmoid(name, batch, kernel_shape, strides, padding='SAME',
+                kernel_initializer=tf.contrib.layers.xavier_initializer(),
+                bias_initializer=tf.constant_initializer(0.0)):
+
+    with tf.variable_scope(name) as scope:
+
+        kernel = _variable_on_cpu('weights',
+                                   shape=kernel_shape,
+                                   initializer=kernel_initializer)
+
+        conv = tf.nn.conv2d(batch, kernel, strides, padding=padding)
+        biases = _variable_on_cpu('biases', [kernel_shape[3]], bias_initializer)
+        pre_activation = tf.nn.bias_add(conv, biases)
+        conv = tf.nn.sigmoid(pre_activation, name=scope.name)
+        _activation_summary(conv)
+
+    return conv
+
+def calculate_upscale_shape(batch, kernel_shape, scale_factor):
+    """ Return an op that calculates sizes """
+
+    batch_size = tf.shape(batch)[0]
+    new_height = tf.multiply(tf.shape(batch)[1], scale_factor)
+    new_width = tf.multiply(tf.shape(batch)[2], scale_factor)
+    depth = kernel_shape[2] # format for conv_transpose is [h,w, output_depth, input_depth]
+
+    return tf.stack([batch_size, new_height, new_width, depth])
+
+def conv_transpose_2x_relu(name, batch, kernel_shape, strides, padding='SAME',
+        kernel_initializer=tf.contrib.layers.xavier_initializer(),
+        bias_initializer=tf.constant_initializer(0.0)):
+
+    with tf.variable_scope(name) as scope:
+
+        output_shape = calculate_upscale_shape(batch, kernel_shape, 2)
+        kernel = _variable_on_cpu('weights',
+                                   shape=kernel_shape,
+                                   initializer=kernel_initializer)
+        conv = tf.nn.conv2d_transpose(batch, kernel, output_shape, strides)
+        biases = _variable_on_cpu('biases', [kernel_shape[2]], bias_initializer)
+        pre_activation = tf.nn.bias_add(conv, biases)
+        conv = tf.nn.relu(pre_activation, name=scope.name)
+
+    return conv
+
+
 def bilinear_kernel_initializer(shape):
     if shape[0] != shape[1]:
         raise Exception('deconv2d_bilinear_upsampling_initializer' +
@@ -126,8 +192,6 @@ def upsample_layer(name, batch, scale):
         _activation_summary(conv)
 
     return conv
-
-
 
 
 
